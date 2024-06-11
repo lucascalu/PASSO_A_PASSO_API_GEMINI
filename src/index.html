@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative AI Example</title>
+</head>
+<body>
+  <center>
+    <h1>
+      IA EDUCACIONAL
+    </h1>
+  
+  </center>
+<br>
+  <center>
+    <button id="generateButton">Expo Hello World</button>
+  </center>
+  <br>   
+<center>
+  <button id="generateButton2">Node Hello World</button>
+</center>
+    
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <script type="module">
+      import { GoogleGenerativeAI } from "@google/generative-ai";
+
+      // Fetch your API_KEY
+      const API_KEY = "//insira aqui sua chave de api//";
+
+      // Access your API key (see "Set up your API key" above)
+      const genAI = new GoogleGenerativeAI(API_KEY);
+
+      // Define expo function in the global scope
+      async function expo() {
+        // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+        const prompt = "Descreva o passo a passo de como implementar um app hello world simples com expo";
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const text = response.text();
+        console.log(text);
+        document.writeln("<center>"+"<pre>"+ text +"</pre>" + "</center>")
+      }
+
+
+
+      async function nodejs() {
+        // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+        const prompt = "Descreva o passo a passo de como implementar um app hello world simples com nodejs";
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const text = response.text();
+        console.log(text);
+        document.writeln("<center>"+"<pre>"+ text +"</pre>" + "</center>")
+      }
+
+      // Add event listener to button
+      document.getElementById('generateButton').addEventListener('click', expo);
+      document.getElementById('generateButton2').addEventListener('click', nodejs);
+    </script>
+</body>
+</html>
